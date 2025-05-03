@@ -29,8 +29,9 @@ while True:
     print(f"\nPergunta {response['num_perg'] + 1}: {response['pergunta']}")
     for opcao in response["opcoes"]:
         print(opcao)
-
-    resposta = input("Digite sua resposta (A, B, C, ou D): ").strip().upper()
+    
+    # Atribui o valor a ser enviado para o servidor
+    resposta = input("").strip().upper()
 
     # Atualiza com a resposta do cliente
     user_data["resp_cliente"] = resposta
