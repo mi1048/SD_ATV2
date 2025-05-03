@@ -1,3 +1,5 @@
+# SERVIDOR MATEMÁTICA
+
 # server.py
 from classcliente import User
 import xmlrpc.server
@@ -6,16 +8,21 @@ class MyServer:
     def __init__(self):
         # Lista de perguntas
         self.perguntas = [
-            {"pergunta": "Qual a capital do Brasil?",
-             "opcoes": ["A) São Paulo", "B) Rio de Janeiro", "C) Brasília", "D) Salvador", "E) Belo Horizonte"],
-             "resposta": "C"},
             {"pergunta": "Quanto é 2 + 2?",
              "opcoes": ["A) 3", "B) 4", "C) 5", "D) 6", "E) 7"],
              "resposta": "B"},
-            {"pergunta": "Qual a cor do céu em dia claro?",
-             "opcoes": ["A) Azul", "B) Verde", "C) Vermelho", "D) Cinza", "E) Branco"],
+            {"pergunta": "Quanto é (2 x 2) / (4 - 2)?",
+             "opcoes": ["A) 0", "B) 1", "C) 2", "D) 3", "E) 4"],
+             "resposta": "C"},
+            {"pergunta": "Qual é o valor da função f(x) = -10x - 8 quando x = 2?",
+             "opcoes": ["A) -12", "B) 12", "C) -16", "D) -28", "E) 36"],
+             "resposta": "D"},
+            {"pergunta": "Um elevador pode levar 20 adultos ou 24 crianças. Se 15 adultos já estão no elevador, quantas crianças ainda podem entrar?",
+             "opcoes": ["A) 6", "B) 7", "C) 8", "D) 5", "E) 4"],
              "resposta": "A"},
-            # ... até 9 perguntas
+            {"pergunta": "Qual é a integral de 3 à 1 de x^2 ?",
+             "opcoes": ["A) 27/3", "B) 19/4", "C) 19/3", "D) 27/4", "E) 26/3"],
+             "resposta": "E"},
         ]
 
     def verify_access(self, user_data):
