@@ -1,53 +1,55 @@
-from user import User
+# server.py
+from classcliente import User
 import xmlrpc.server
 
 class MyServer:
- def verify_access(self, user_data):
+    def __init__(self):
+        # Lista de perguntas
+        self.perguntas = [
+            {"pergunta": "Qual a capital do Brasil?",
+             "opcoes": ["A) São Paulo", "B) Rio de Janeiro", "C) Brasília", "D) Salvador", "E) Belo Horizonte"],
+             "resposta": "C"},
+            {"pergunta": "Quanto é 2 + 2?",
+             "opcoes": ["A) 3", "B) 4", "C) 5", "D) 6", "E) 7"],
+             "resposta": "B"},
+            {"pergunta": "Qual a cor do céu em dia claro?",
+             "opcoes": ["A) Azul", "B) Verde", "C) Vermelho", "D) Cinza", "E) Branco"],
+             "resposta": "A"},
+            # ... até 9 perguntas
+        ]
 
-    # Reconstrói o objeto Usuario a partir do dicionário recebido
-    user = User(user_data['nome_usuario'], user_data['quantidade_pts'], user_data['num_perg'], user_data['resp_cliente'])
+    def verify_access(self, user_data):
+        user = User(**user_data)
 
-    int perg_server
+        if user.num_perg >= len(self.perguntas):
+            return {"fim": True, "mensagem": f"Fim do quiz. Pontuação: {user.quantidade_pts}"}
 
-    #Verificar qual a pergunta atual
-    def escolher_opcao(perg_server):
-       
-    if perg_server == 1:
-        return "Você escolheu 1"
-    elif perg_server == 2:
-        return "Você escolheu 2"
-    elif perg_server == 3:
-        return "Você escolheu 3"
-    elif perg_server == 1:
-        return "Você escolheu 4"
-    elif perg_server == 2:
-        return "Você escolheu 5"
-    elif perg_server == 3:
-        return "Você escolheu 6"
-    elif perg_server == 1:
-        return "Você escolheu 7"
-    elif perg_server == 2:
-        return "Você escolheu 8"
-    elif perg_server == 3:
-        return "Você escolheu 9"
-    else:
-        return "Opção inválida"
+        pergunta_atual = self.perguntas[user.num_perg]
+        return {
+            "fim": False,
+            "pergunta": pergunta_atual["pergunta"],
+            "opcoes": pergunta_atual["opcoes"],
+            "num_perg": user.num_perg,
+            "quantidade_pts": user.quantidade_pts
+        }
 
-    #voltar a proxima pergunta 
-    
-    
+    def responder(self, user_data):
+        user = User(**user_data)
+        resposta_correta = self.perguntas[user.num_perg]["resposta"]
 
-    # Verificar a pergunta atual
-    if user.num_perg == perg_server:
-      
+        resultado = "correta" if user.resp_cliente.upper() == resposta_correta else f"errada! Correta: {resposta_correta}"
+        if user.resp_cliente.upper() == resposta_correta:
+            user.quantidade_pts += 1
 
-    # Verifica a senha
-    ##if user.senha == "1234":
-##return "Acesso permitido"
-##else:
-##return "Acesso negado"
+        user.num_perg += 1  # próxima pergunta
 
-server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000),
-allow_none=True)
+        return {
+            "resultado": resultado,
+            "quantidade_pts": user.quantidade_pts,
+            "num_perg": user.num_perg
+        }
+
+server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000), allow_none=True)
 server.register_instance(MyServer())
+print("Servidor rodando na porta 8000...")
 server.serve_forever()
