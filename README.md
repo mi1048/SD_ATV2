@@ -9,7 +9,7 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
 
 # RPC (Remote Procedure Call)
 
-- O cliente e servidor foi implementado pela biblioteca xmlrpc que ja vem imbutida no Python
+- O cliente e servidor foi implementado pela biblioteca xmlrpc que ja vem embutida no Python
 
 # Detalhes da Atividade
 
