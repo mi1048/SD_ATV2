@@ -1,7 +1,15 @@
 # SD_ATV2
-Atividade de Sistemas Distribuidos e Programa Paralela
+Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implementar um quiz cliente e servidor utilizando RPC
+
 # Equipe 
-- 
+
+- Eric Menezes
+  
+- Rodrigo Sarno
+
+# RPC (Remote Procedure Call)
+
+- O cliente e servidor foi implementado pela biblioteca xmlrpc que ja vem imbutida no Python
 
 # Detalhes da Atividade
 
