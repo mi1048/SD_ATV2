@@ -1,4 +1,4 @@
-# SD E PP
+# SISTEMAS DISTRIBUÍDOS E PROGRAMAÇÃO PARALELA
 
 # server.py
 from classcliente import User
