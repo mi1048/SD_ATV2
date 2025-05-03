@@ -1,8 +1,14 @@
 # SD_ATV2
 Atividade de Sistemas Distribuidos e Programa Paralela
+# Equipe 
+- 
 
-Quiz Distribuído - Aplicação Cliente-Servidor
-📘 Descrição
-Este projeto consiste em uma aplicação distribuída que simula um quiz de perguntas e respostas. O sistema é composto por um servidor, responsável pelas regras do jogo, e clientes, que se conectam para participar do quiz.
+# Detalhes da Atividade
 
-A comunicação entre servidor e clientes pode ser implementada usando Sockets ou RPC, com foco em permitir múltiplas conexões concorrentes e interoperabilidade entre diferentes implementações de equipes.
+- O projeto da unidade envolve a criação de uma aplicação distribuída que simula um quiz de perguntas e respostas. Deve-se implementar um servidor usando RPC ou Socket, o qual gerenciará as regras do jogo e permitirá que múltiplas aplicações clientes se conectem para participar.
+
+# Requisitos do projeto incluem:
+
+- O servidor deve implementar as regras para gerenciar a pontuação dos jogadores, baseando-se em seus acertos e erros (resposta correta, 1 ponto).
+
+- As aplicações clientes precisam ser capazes de se conectar ao servidor para iniciar e realizar suas jogadas. A dinâmica do jogo envolve receber perguntas do servidor e submeter respostas.
