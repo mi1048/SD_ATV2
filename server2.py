@@ -72,7 +72,7 @@ class MyServer:
             "num_perg": user.num_perg
         }
 
-server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000), allow_none=True)
+server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8001), allow_none=True)
 server.register_instance(MyServer())
-print("Servidor rodando na porta 8000...")
+print("Servidor rodando na porta 8001...")
 server.serve_forever()
