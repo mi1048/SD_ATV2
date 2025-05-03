@@ -3,6 +3,9 @@ import xmlrpc.client
 from classcliente import User
 
 server = xmlrpc.client.ServerProxy("http://localhost:8000")
+server = xmlrpc.client.ServerProxy("http://localhost:8001")
+server = xmlrpc.client.ServerProxy("http://localhost:8002")
+
 nome_usuario = input("Digite seu nome: ")
 
 quantidade_pts = 0
@@ -27,7 +30,7 @@ while True:
     for opcao in response["opcoes"]:
         print(opcao)
 
-    resposta = input("Digite sua resposta (A, B, C, D ou E): ").strip().upper()
+    resposta = input("Digite sua resposta (A, B, C, ou D): ").strip().upper()
 
     # Atualiza com a resposta do cliente
     user_data["resp_cliente"] = resposta
