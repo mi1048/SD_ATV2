@@ -10,33 +10,8 @@ nome_usuario = input("Digite seu nome: ")
 
 quantidade_pts = 0
 num_perg = 0
+# cliente.py
+import xmlrpc.client
 
-while True:
-    user = User(nome_usuario, quantidade_pts, num_perg)
-    user_data = {
-        "nome_usuario": user.nome_usuario,
-        "quantidade_pts": user.quantidade_pts,
-        "num_perg": user.num_perg,
-        "resp_cliente": ""
-    }
-
-    response = server.verify_access(user_data)
-
-    if response["fim"]:
-        print(response["mensagem"])
-        break
-
-    print(f"\nPergunta {response['num_perg'] + 1}: {response['pergunta']}")
-    for opcao in response["opcoes"]:
-        print(opcao)
-    
-    # Atribui o valor a ser enviado para o servidor
-    resposta = input("").strip().upper()
-
-    # Atualiza com a resposta do cliente
-    user_data["resp_cliente"] = resposta
-    resposta_server = server.responder(user_data)
-
-    print(f"Você respondeu: {resposta} -> Resposta {resposta_server['resultado']}")
-    quantidade_pts = resposta_server["quantidade_pts"]
-    num_perg = resposta_server["num_perg"]
+server = xmlrpc.client.ServerProxy("http://localhost:8000")
+server.iniciar_quiz()
