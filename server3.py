@@ -28,7 +28,7 @@ class MyServer:
              "resposta": "D"},
             {"pergunta": "No filme 'Wall-E', qual é o nome da empresa responsável pela poluição da Terra e pela criação dos robôs?",
              "opcoes": ["A) AS (Astral Safety)", "B) BnL (Buy n Large)", "C) CnB (Construct & Build)", "D) D&D (Dungeons & Dragons)"],
-             "resposta": "B"} 
+             "resposta": "B"},
             {"pergunta": "No filme 'Jurassic World', qual é o nome do dinossauro pálido que escapa da jaula?",
              "opcoes": ["A) Indominus Rex", "B) Indoraptor", "C) Tiranossaurus Rex", "D) Paletosaurus"],
              "resposta": "A"},
