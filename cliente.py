@@ -2,9 +2,26 @@
 import xmlrpc.client
 from classcliente import User
 
-server = xmlrpc.client.ServerProxy("http://localhost:8000", allow_none=True)
-#server = xmlrpc.client.ServerProxy("http://localhost:8001", allow_none=True)
-#server = xmlrpc.client.ServerProxy("http://localhost:8002", allow_none=True)
+# Menu para escolher a porta do servidor
+print("=== MENU DE OPÇÕES ===")
+print("1 - Conectar à porta 8000")
+print("2 - Conectar à porta 8001")
+print("3 - Conectar à porta 8002")
+
+opcao = input("Escolha uma opção (1/2/3): ").strip()
+
+if opcao == '1':
+    porta = 8000
+elif opcao == '2':
+    porta = 8001
+elif opcao == '3':
+    porta = 8002
+else:
+    print("Opção inválida. Encerrando o programa.")
+    exit()
+
+# Conecta ao servidor com a porta selecionada
+server = xmlrpc.client.ServerProxy(f"http://localhost:{porta}", allow_none=True)
 
 nome_usuario = input("Digite seu nome: ").strip()
 user = User(nome_usuario)
