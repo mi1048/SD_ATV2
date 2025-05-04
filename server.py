@@ -1,14 +1,11 @@
-# SERVIDOR MATEMÁTICA
-
 # server.py
 from classcliente import User
 import xmlrpc.server
 
 class MyServer:
     def __init__(self):
-        # Lista de perguntas
         self.perguntas = [
-            {"pergunta": "Quanto é 2 + 2?",
+            {"pergunta": "Quanto é 2 + 2?", 
              "opcoes": ["A) 3", "B) 4", "C) 5", "D) 6"],
              "resposta": "B"},
             {"pergunta": "Quanto é (2 x 2) / (4 - 2)?",
@@ -23,48 +20,45 @@ class MyServer:
             {"pergunta": "Qual é a integral de x^2, de 1 até 3?",
              "opcoes": ["A) 27/3", "B) 19/4", "C) 19/3", "D) 26/3"],
              "resposta": "D"},
-            {"pergunta": "Pedro tem 30 anos. Se ele tivesse nascido há 10 anos atrás, quantos anos ele teria?",
-             "opcoes": ["A) 10", "B) 20", "C) 15", "D) 40"],
-             "resposta": "A"},
+            {"pergunta": "Pedro tem 30 anos. Se ele tivesse nascido há 10 anos atrás,
+            quantos anos ele teria?",
+            "opcoes": ["A) 10", "B) 20", "C) 15", "D) 40"],
+            "resposta": "A"},
             {"pergunta": "Resolva o logaritmo log 3 (27,81)",
-             "opcoes": ["A) 5", "B) 6", "C) 7", "D) 8"],
-             "resposta": "C"},
+            "opcoes": ["A) 5", "B) 6", "C) 7", "D) 8"],
+            "resposta": "C"},
             {"pergunta": "Informe a derivada em y de 20xy - 37y: ",
-             "opcoes": ["A) 20y - 37", "B) 20x - 37", "C) 20xy - 37", "D) 20x - 37y"],
-             "resposta": "B"},
+            "opcoes": ["A) 20y - 37", "B) 20x - 37", "C) 20xy - 37","D) 20x - 37y"],
+            "resposta": "B"},
         ]
+        
+# funcao a ser chamada pelo cliente
 
-    def verify_access(self, user_data):
-        user = User(**user_data)
+    def iniciar_quiz(self):
+        nome_usuario = input("Digite seu nome: ")
+        user = User(nome_usuario, 0, 0)
 
-        if user.num_perg >= len(self.perguntas):
-            return {"fim": True, "mensagem": f"Fim do quiz. Pontuação: {user.quantidade_pts}"}
+        while user.num_perg < len(self.perguntas):
+            pergunta_atual = self.perguntas[user.num_perg]
+            print(f"\nPergunta {user.num_perg + 1}: {pergunta_atual['pergunta']}")
+            for opcao in pergunta_atual['opcoes']:
+                print(opcao)
+            
+            resposta = input("Sua resposta: ").strip().upper()
+            resposta_correta = pergunta_atual["resposta"]
 
-        pergunta_atual = self.perguntas[user.num_perg]
-        return {
-            "fim": False,
-            "pergunta": pergunta_atual["pergunta"],
-            "opcoes": pergunta_atual["opcoes"],
-            "num_perg": user.num_perg,
-            "quantidade_pts": user.quantidade_pts
-        }
+            if resposta == resposta_correta:
+                print("Resposta correta!")
+                user.quantidade_pts += 1
+            else:
+                print(f"Resposta errada! Correta: {resposta_correta}")
+            
+            user.num_perg += 1
 
-    def responder(self, user_data):
-        user = User(**user_data)
-        resposta_correta = self.perguntas[user.num_perg]["resposta"]
+        print(f"\n Fim do quiz, {user.nome_usuario}! Você fez {user.quantidade_pts} ponto(s).")
+        return True  # apenas para indicar que terminou sem erro
 
-        resultado = "correta" if user.resp_cliente.upper() == resposta_correta else f"errada! Correta: {resposta_correta}"
-        if user.resp_cliente.upper() == resposta_correta:
-            user.quantidade_pts += 1
-
-        user.num_perg += 1  # próxima pergunta
-
-        return {
-            "resultado": resultado,
-            "quantidade_pts": user.quantidade_pts,
-            "num_perg": user.num_perg
-        }
-
+# Inicia o servidor
 server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000), allow_none=True)
 server.register_instance(MyServer())
 print("Servidor rodando na porta 8000...")
