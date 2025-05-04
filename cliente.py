@@ -1,4 +1,4 @@
-# cliente.py
+# Classe do cliente
 import xmlrpc.client
 from classcliente import User
 
