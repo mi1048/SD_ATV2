@@ -3,6 +3,8 @@ import xmlrpc.client
 from classcliente import User
 
 server = xmlrpc.client.ServerProxy("http://localhost:8000", allow_none=True)
+#server = xmlrpc.client.ServerProxy("http://localhost:8001", allow_none=True)
+#server = xmlrpc.client.ServerProxy("http://localhost:8002", allow_none=True)
 
 nome_usuario = input("Digite seu nome: ").strip()
 user = User(nome_usuario)
