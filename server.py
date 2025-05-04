@@ -1,11 +1,16 @@
 # server.py
 from classcliente import User
+from xmlrpc.server import SimpleXMLRPCRequestHandler
+from socketserver import ThreadingMixIn
 import xmlrpc.server
+
+class ThreadedXMLRPCServer(ThreadingMixIn, xmlrpc.server.SimpleXMLRPCServer):
+    pass
 
 class MyServer:
     def __init__(self):
         self.perguntas = [
-            {"pergunta": "Quanto é 2 + 2?", 
+            {"pergunta": "Quanto é 2 + 2?",
              "opcoes": ["A) 3", "B) 4", "C) 5", "D) 6"],
              "resposta": "B"},
             {"pergunta": "Quanto é (2 x 2) / (4 - 2)?",
@@ -28,38 +33,60 @@ class MyServer:
             "opcoes": ["A) 5", "B) 6", "C) 7", "D) 8"],
             "resposta": "C"},
             {"pergunta": "Informe a derivada em y de 20xy - 37y: ",
-            "opcoes": ["A) 20y - 37", "B) 20x - 37", "C) 20xy - 37","D) 20x - 37y"],
-            "resposta": "B"},
+             "opcoes": ["A) 20y - 37", "B) 20x - 37", "C) 20xy - 37", "D) 20x - 37y"],
+             "resposta": "B"},
         ]
         
-# funcao a ser chamada pelo cliente
+        self.jogadores = {}  # chave: nome_usuario, valor: User
 
-    def iniciar_quiz(self):
-        nome_usuario = input("Digite seu nome: ")
-        user = User(nome_usuario, 0, 0)
+    def iniciar_sessao(self, nome_usuario):
+        if nome_usuario not in self.jogadores:
+            self.jogadores[nome_usuario] = User(nome_usuario)
+        return f"Sessão iniciada para {nome_usuario}."
 
-        while user.num_perg < len(self.perguntas):
-            pergunta_atual = self.perguntas[user.num_perg]
-            print(f"\nPergunta {user.num_perg + 1}: {pergunta_atual['pergunta']}")
-            for opcao in pergunta_atual['opcoes']:
-                print(opcao)
-            
-            resposta = input("Sua resposta: ").strip().upper()
-            resposta_correta = pergunta_atual["resposta"]
+    def proxima_pergunta(self, nome_usuario):
+        user = self.jogadores.get(nome_usuario)
+        if not user:
+            return {"erro": "Sessão não iniciada."}
 
-            if resposta == resposta_correta:
-                print("Resposta correta!")
-                user.quantidade_pts += 1
-            else:
-                print(f"Resposta errada! Correta: {resposta_correta}")
-            
-            user.num_perg += 1
+        if user.num_perg >= len(self.perguntas):
+            return {
+                "fim": True,
+                "mensagem": f"Fim do quiz. Pontuação final: {user.quantidade_pts}"
+            }
 
-        print(f"\n Fim do quiz, {user.nome_usuario}! Você fez {user.quantidade_pts} ponto(s).")
-        return True  # apenas para indicar que terminou sem erro
+        pergunta = self.perguntas[user.num_perg]
+        return {
+            "fim": False,
+            "num_perg": user.num_perg + 1,
+            "pergunta": pergunta["pergunta"],
+            "opcoes": pergunta["opcoes"]
+        }
 
-# Inicia o servidor
-server = xmlrpc.server.SimpleXMLRPCServer(("localhost", 8000), allow_none=True)
+    def enviar_resposta(self, nome_usuario, resposta):
+        user = self.jogadores.get(nome_usuario)
+        if not user:
+            return {"erro": "Sessão não iniciada."}
+
+        if user.num_perg >= len(self.perguntas):
+            return {"mensagem": "Jogo já finalizado."}
+
+        correta = self.perguntas[user.num_perg]["resposta"]
+        resultado = "correta" if resposta.upper() == correta else f"errada! Correta: {correta}"
+
+        if resposta.upper() == correta:
+            user.quantidade_pts += 1
+
+        user.num_perg += 1
+
+        return {
+            "resultado": resultado,
+            "quantidade_pts": user.quantidade_pts,
+            "num_perg": user.num_perg
+        }
+
+# Iniciar servidor threaded
+server = ThreadedXMLRPCServer(("localhost", 8000), allow_none=True)
 server.register_instance(MyServer())
-print("Servidor rodando na porta 8000...")
+print("Servidor rodando na porta 8000 com suporte a múltiplos clientes...")
 server.serve_forever()
