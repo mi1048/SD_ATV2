@@ -1,4 +1,4 @@
-# server.py (Servidor com multithread e processamento completo)
+# server de METAMATICA
 from classcliente import User
 from xmlrpc.server import SimpleXMLRPCServer
 from socketserver import ThreadingMixIn
