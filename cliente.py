@@ -4,9 +4,9 @@ from classcliente import User
 
 # Menu para escolher a porta do servidor
 print("=== MENU DE OPÇÕES ===")
-print("1 - Conectar à porta 8000")
-print("2 - Conectar à porta 8001")
-print("3 - Conectar à porta 8002")
+print("1 - Conectar à porta 8000 (Matemática)")
+print("2 - Conectar à porta 8001 (Sistemas Distribuídos & Programação Paralela)")
+print("3 - Conectar à porta 8002 (Filmes)")
 
 opcao = input("Escolha uma opção (1/2/3): ").strip()
 
