@@ -1,15 +1,10 @@
-# server.py (Servidor com multithread e processamento completo)
+# servidor de MATEMATICA
+from classcliente import User
 from xmlrpc.server import SimpleXMLRPCServer
 from socketserver import ThreadingMixIn
 import threading
 
-class User:
-    def __init__(self, nome_usuario, quantidade_pts=0, num_perg=0, resp_cliente=None):
-        self.nome_usuario = nome_usuario
-        self.quantidade_pts = quantidade_pts
-        self.num_perg = num_perg
-        self.resp_cliente = resp_cliente
-
+# cria a classe de multithreads
 class ThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer):
     pass
 
@@ -87,6 +82,7 @@ class MyServer:
                 "num_perg": user_atual.num_perg
             }
 
+# inicia o server na porta e escuta
 server = ThreadedXMLRPCServer(("localhost", 8000), allow_none=True)
 server.register_instance(MyServer())
 print("Servidor pronto na porta 8000. Esperando conexões...")
