@@ -4,7 +4,7 @@ from xmlrpc.server import SimpleXMLRPCServer
 from socketserver import ThreadingMixIn
 import threading
 
-# cria 
+# cria a classe de multithreads
 class ThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer):
     pass
 
