@@ -1,4 +1,4 @@
-# servidor de MATEMATICA
+# servidor de SISTEMAS DISTRIBUÍDOS & PROGRAMAÇÃO PARALELA
 from classcliente import User
 from xmlrpc.server import SimpleXMLRPCServer
 from socketserver import ThreadingMixIn
@@ -41,6 +41,7 @@ class MyServer:
              {"pergunta": "Em sistemas distribuídos, o que é o middleware?",
              "opcoes": ["A) Uma aplicação cliente leve", "B) Um serviço de monitoramento remoto", "C) Um software que facilita a comunicação entre aplicações distribuídas", "D) Um tipo de antivírus distribuído"],
              "resposta": "C"},
+        ]
         self.usuarios = {}  # Armazena os estados dos usuários
         self.lock = threading.Lock()
 
@@ -104,7 +105,7 @@ class MyServer:
             }
 
 # inicia o server na porta e escuta
-server = ThreadedXMLRPCServer(("localhost", 8000), allow_none=True)
+server = ThreadedXMLRPCServer(("localhost", 8001), allow_none=True)
 server.register_instance(MyServer())
-print("Servidor pronto na porta 8000. Esperando conexões...")
+print("Servidor pronto na porta 8001. Esperando conexões...")
 server.serve_forever()
