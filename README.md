@@ -13,11 +13,11 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
 
 # Classe em python necessaria para realizar a conexão cliente com o servidor
 
-`class User:
-    def __init__(self, nome_usuario, quantidade_pts=0, num_perg=0, resp_cliente=None):
-        self.nome_usuario = nome_usuario
-        self.quantidade_pts = quantidade_pts
-        self.num_perg = num_perg
+`class User:\n
+    def __init__(self, nome_usuario, quantidade_pts=0, num_perg=0, resp_cliente=None):\n
+        self.nome_usuario = nome_usuario\n
+        self.quantidade_pts = quantidade_pts\n
+        self.num_perg = num_perg\n
         self.resp_cliente = resp_cliente`
 
 
