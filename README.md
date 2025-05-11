@@ -15,7 +15,7 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
 
 ``
 
-   class User:
+      class User:
        def __init__(self, nome_usuario, quantidade_pts=0, num_perg=0, resp_cliente=None):
     
        self.nome_usuario = nome_usuario
