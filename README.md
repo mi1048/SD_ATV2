@@ -11,6 +11,16 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
 
 - O cliente e servidor foi implementado pela biblioteca xmlrpc que ja vem embutida no Python
 
+# Classe em python necessaria para realizar a conexão cliente com o servidor
+
+`class User:
+    def __init__(self, nome_usuario, quantidade_pts=0, num_perg=0, resp_cliente=None):
+        self.nome_usuario = nome_usuario
+        self.quantidade_pts = quantidade_pts
+        self.num_perg = num_perg
+        self.resp_cliente = resp_cliente`
+
+
 # Detalhes da Atividade
 
 - O projeto da unidade envolve a criação de uma aplicação distribuída que simula um quiz de perguntas e respostas. Deve-se implementar um servidor usando RPC ou Socket, o qual gerenciará as regras do jogo e permitirá que múltiplas aplicações clientes se conectem para participar.
