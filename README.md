@@ -27,9 +27,9 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
 
 - Dica: Isso implica que o modelo de troca de dados deve ser padronizado e compartilhado por todas as equipes.
 
-  # Principais criterios de avaliação
+# Principais criterios de avaliação
 
-  ## Clareza na implementação
+## Clareza na implementação
 
   - Organização do código, legibilidade e boas práticas, Implementações coerentes e funcionais para cliente e servidor, respeitando seus papéis distintos no sistema
     
