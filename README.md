@@ -54,8 +54,6 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
   - Demonstração funcional do sistema, explicação dos principais trechos do código, destaque para decisões técnicas relacionadas à interoperabilidade
  
 
-  # Video
-
   
  
 
