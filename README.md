@@ -37,11 +37,26 @@ Atividade de Sistemas Distribuidos e Programa Paralela com objetivo de implement
 
   - Uso adequado de estruturas de dados, serialização/deserialização correta (ex: JSON, XML, etc.), Troca eficiente de informações entre cliente e servidor
 
+  ## Interoperabilidade
+
+  - Capacidade de um cliente se conectar a servidores desde que utilize um padrão comum de comunicação, flexibilidade e compatibilidade na troca de mensagens
+    
   ## Funcionamento geral da aplicação
 
-  - 
+  - Conectividade cliente-servidor, fluxo do jogo (envio de perguntas, recebimento de respostas, contagem de pontos)
  
   ## Documentação do projeto
+
+  - README claro com instruções de uso, explicação da arquitetura e do protocolo de comunicação, referência ao padrão adotado para interoperabilidade
  
   ## Apresentação em vídeo
+
+  - Demonstração funcional do sistema, explicação dos principais trechos do código, destaque para decisões técnicas relacionadas à interoperabilidade
+ 
+
+  # Video
+
+  
+ 
+
   
